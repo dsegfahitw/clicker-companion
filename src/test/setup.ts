@@ -64,3 +64,6 @@ Object.defineProperty(window, "matchMedia", {
 if (typeof window.confirm === "undefined") {
   window.confirm = () => true;
 }
+
+// ---- scrollTo (TanStack Router scroll restoration) ----
+window.scrollTo = vi.fn() as any;
