@@ -12,6 +12,7 @@ import {
 } from "./state";
 import { ACHIEVEMENTS } from "./data/achievements";
 import { EVENTS } from "./data/events";
+import { MARKET_ITEMS } from "./data/market";
 import { DAILY_TASKS, DAILY_REWARDS } from "./data/dailyTasks";
 import { stageFromEarned, STAGES } from "./data/stages";
 import { sfx } from "./sound";
@@ -235,12 +236,9 @@ export function useGame() {
   const buyMarketItem = useCallback((id: string) => {
     setState(prev => {
       if (prev.marketOwned.includes(id)) { sound("error"); return prev; }
-      const item = stateRef.current && (require => null); // noop
-      // Find item via static import
-      const market = (window as any).__MARKET__ ?? [];
-      const it = market.find((m: any) => m.id === id);
+      const it = MARKET_ITEMS.find(m => m.id === id);
       const cost = it?.cost ?? 0;
-      if (prev.money < cost) { sound("error"); return prev; }
+      if (!it || prev.money < cost) { sound("error"); return prev; }
       sound("buy");
       let next: GameState = {
         ...prev,
