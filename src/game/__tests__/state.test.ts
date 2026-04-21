@@ -193,13 +193,24 @@ describe("businessCost", () => {
     expect(c2).toBe(Math.floor(BUSINESSES[0].baseCost * Math.pow(1.8, 2)));
   });
 
-  it("haggling discount caps at 50%", () => {
+  it("haggling reduces cost (capped at 50%)", () => {
+    const base = businessCost(initialState(), BUSINESSES[0].id);
     const s: GameState = {
       ...initialState(),
-      skills: { ...initialState().skills, haggling: 5 }, // would be 0.75 discount -> capped at 0.5
+      skills: { ...initialState().skills, haggling: 5 },
     };
-    const id = BUSINESSES[0].id;
-    expect(businessCost(s, id)).toBe(Math.floor(BUSINESSES[0].baseCost * 0.5));
+    // 1 - 5*0.05 = 0.75 multiplier (cap of 0.5 not reached at max skill 5)
+    expect(businessCost(s, BUSINESSES[0].id)).toBe(Math.floor(BUSINESSES[0].baseCost * 0.75));
+    expect(businessCost(s, BUSINESSES[0].id)).toBeLessThan(base);
+  });
+
+  it("never goes below 50% of base via the discount cap", () => {
+    // Manually craft an out-of-range skills value to verify the clamp itself
+    const s: GameState = {
+      ...initialState(),
+      skills: { ...initialState().skills, haggling: 100 as number },
+    };
+    expect(businessCost(s, BUSINESSES[0].id)).toBe(Math.floor(BUSINESSES[0].baseCost * 0.5));
   });
 
   it("returns Infinity for unknown business", () => {

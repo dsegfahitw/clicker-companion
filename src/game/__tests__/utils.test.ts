@@ -13,10 +13,10 @@ describe("formatMoney", () => {
     expect(formatMoney(0)).toMatch(/₴0/);
   });
 
-  it("formats small numbers with locale separators", () => {
-    const out = formatMoney(1234);
+  it("formats small numbers below 1000 with locale digits", () => {
+    const out = formatMoney(987);
     expect(out).toContain("₴");
-    expect(out).toMatch(/1[\s\u00A0]?23/); // "1.23K" actually -> uses K branch
+    expect(out).toMatch(/987/);
   });
 
   it("uses K for >= 1k", () => {
