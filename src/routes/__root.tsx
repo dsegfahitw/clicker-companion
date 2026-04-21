@@ -1,24 +1,16 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-
+import { Outlet, createRootRoute, HeadContent, Scripts, Link } from "@tanstack/react-router";
 import appCss from "../styles.css?url";
+import { GameLayout } from "@/components/game/GameLayout";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
+        <h2 className="mt-4 text-xl font-semibold">Сторінку не знайдено</h2>
+        <Link to="/" className="mt-6 inline-flex rounded-2xl bg-gradient-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-glow-primary">
+          На головну
+        </Link>
       </div>
     </div>
   );
@@ -28,22 +20,15 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" },
+      { name: "theme-color", content: "#1e2a4a" },
+      { title: "Українець: Шлях До Успіху" },
+      { name: "description", content: "Український ідл-клікер: від робітника до олігарха. Прокачуй бізнес, навички, обирай чесно чи з хабарами." },
+      { property: "og:title", content: "Українець: Шлях До Успіху" },
+      { property: "og:description", content: "Український ідл-клікер: від робітника до олігарха." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -52,10 +37,8 @@ export const Route = createRootRoute({
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
+    <html lang="uk">
+      <head><HeadContent /></head>
       <body>
         {children}
         <Scripts />
@@ -65,5 +48,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <GameLayout />
+  );
 }
