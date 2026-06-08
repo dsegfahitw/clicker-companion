@@ -4,6 +4,16 @@ A mobile-first idle clicker game where you guide a Ukrainian hero from village w
 
 > Faithful port of [`dsegfahitw/ukrainian-clicker`](https://github.com/dsegfahitw/ukrainian-clicker) with a fresh, polished mobile-game UI.
 
+## 📸 Screenshots
+
+| Life (tap)                              | Work                                    | Business                                        |
+| --------------------------------------- | --------------------------------------- | ----------------------------------------------- |
+| ![Life](docs/screenshots/life.png)      | ![Work](docs/screenshots/work.png)      | ![Business](docs/screenshots/business.png)      |
+
+| Skills                                  | Market                                  | Settings & Achievements                         |
+| --------------------------------------- | --------------------------------------- | ----------------------------------------------- |
+| ![Skills](docs/screenshots/skills.png)  | ![Market](docs/screenshots/market.png)  | ![Settings](docs/screenshots/settings.png)      |
+
 ## ✨ Features
 
 - **6 Tabs** — Life (tap), Work, Business, Skills, Market, Settings
